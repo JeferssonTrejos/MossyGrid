@@ -1,0 +1,350 @@
+#how-to-play-menu{
+    z-index: 2;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+#how-to-play-menu div{
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2%;
+    border-radius: 4px;
+}
+
+#btnHowToPlayClose{
+    /* width: 75%; */
+    padding: 16px 50px;
+    
+    /* margin-top: 15%; */
+    background-color: #74a257;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px 15px;
+}
+
+
+#start-menu{
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+.start-menu-container{
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2%;
+    width: 16%;
+    border-radius: 4px;
+    /* width: 20%;
+    height: 30%; */
+}
+
+.start-menu-container h4{
+    margin:  0;
+}
+
+#btnStartFirsGame{
+    width: 75%;
+    padding: 7% 0;
+    /* height: 100%; */
+    /* padding: 7% 15%; */
+    margin-top: 15%;
+    background-color: #74a257;
+    border: none;
+    border-radius: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+#start-new-game{
+    z-index: 1;
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.start-game-container{
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    box-sizing: border-box;
+    padding: 2%;
+    width: 25%;
+    border-radius: 4px;
+    /* width: 20%;
+    height: 30%; */
+}
+
+.start-game-container h4{
+    margin:  0;
+    margin-bottom: 4%;
+}
+
+.start-game-container input{
+    width: 100%;
+    border-style: none;
+    outline: none;
+    box-sizing: border-box;
+    margin: 2% 0;
+    padding: 4%;
+    border-radius: 6px;
+}   
+.start-game-container input:focus{
+    background-color: #00000020;
+}
+
+.start-game-buttons{
+    margin-top: 4%;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.start-game-buttons button{
+    box-sizing: border-box;
+    padding: 5% 0;
+    margin: 0 1%;
+    width: 100%;
+    background-color: #74a257;
+    border: none;
+    border-radius: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+.btnHowToPlay{
+    box-sizing: border-box;
+    padding: 5% 0;
+    margin: 0 1%;
+    margin-top: 3%;
+    width: 100%;
+    background-color: #74a257;
+    border: none;
+    border-radius: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#btnNewGameCancel{
+    display: none;
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/img/fondo.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.container {
+    position: absolute;
+    top: 4.5%; 
+    left: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 2vh auto;
+    max-width: 1200px;
+    padding: 1%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    text-align: center;
+    background-color: #74a257;
+    color: #fff;
+    padding: 2%;
+    width: 94%;
+    margin: 0 auto;
+    height: 10%;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+}
+
+.cuadro-principal {
+    flex: 3;
+    background-color: #74a257;
+    padding: 2%;
+    margin-right: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.icon-container{
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: center;
+    width: 100%;
+    color: #fff;
+    font-size: 150%;
+}
+.icon-container div{
+    display: flex;
+    align-items: center;
+}
+.player{
+    width: 100%;
+    word-break: break-all;
+}
+
+.player h2{
+    margin: 0;
+}
+
+#containerPlayerO{
+    justify-content: end;
+}
+
+.iconX, .icon0{
+    height: 40px;
+    margin: 0 10px;
+}
+
+.player{
+    background-color: rgb(98, 142, 69,0);
+    border-radius: 5px;
+    transition: 0.15s;
+}
+
+
+.palyerscores p{
+    margin: 0 10px;
+}
+
+.puntaje{
+    margin-top: 10px;
+    font-size: 30px;
+    color:#ffffff
+}
+
+.squares {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    max-height: 37vh;
+    max-width: 37vh;
+    width: 70%;
+    aspect-ratio: 1 / 1;
+}
+.frame {
+    padding: 10%;
+    border: 2px solid rgb(255, 253, 253);
+    background-color: rgba(255, 255, 255, 0);
+    color: #ffffff;
+    font-size: 300%;
+}
+
+#frame1,
+#frame2,
+#frame3 {
+    border-top: none;
+}
+
+#frame1,
+#frame4,
+#frame7 {
+    border-left: none;
+}
+
+#frame3,
+#frame6,
+#frame9 {
+    border-right: none;
+}
+
+#frame7,
+#frame8,
+#frame9 {
+    border-bottom: none;
+}
+.boton-container{
+    display: flex;
+    width: 100%;
+}
+.boton-container h3{
+    color: white;
+
+}
+
+.boton-rest{
+    width: 20%;
+    padding: 3% 1%;
+    margin-bottom: 1%;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+.boton-rest:hover {
+    background-color: #c5c5c5;
+}
+
+
+.cuadro-opciones {
+    flex: 1;
+    background-color: #bb9976;
+    padding: 2%;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.boton {
+    width: 70%;
+    height: 15%;
+    padding: 1%;
+    margin-bottom: 1%;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.boton:hover {
+    background-color: #c5c5c5;;
+}
+
+.logo {
+    width: 30%;
+
+}
+.notificacionTurno {
+    color: #ffffff;
+    margin: 2%, 2%;
+}
+
+
