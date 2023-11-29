@@ -62,15 +62,15 @@ function newGame(status) {
     if (status) {//El juego inicia / comprobaciones
         switch (true) {
             case playerX == '' && playerO == '':
-                console.log('Nombre de jugador 1 y 2 vacios')
+                alert('Los nombres no deben estar vacios');
                 break
 
                 case playerX == '':
-                    console.log('Nombre de jugador 1 vacio')
+                    alert('Nombre de jugador X no puede estar vacio');
                 break;
                 
             case playerO == '':
-                console.log('Nombre de jugador 2 vacio')
+                alert('Nombre de jugador O no puede estar vacio')
                 break;
 
             default://inicia la partida
