@@ -154,7 +154,7 @@ body {
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    
+
 }
 body::before {
     content: "";
@@ -163,8 +163,8 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-
+    background: rgba(0, 0, 0, 0.4); 
+    
 }
 .banner{
     width: 100%;
@@ -331,7 +331,7 @@ main {
 
 .cuadro-opciones {
     flex: 1;
-    background-color: #91C691;
+    background-color: #AD9F6D;
     padding: 2%;
     border-radius: 5%;
     display: flex;
