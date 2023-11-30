@@ -62,15 +62,15 @@ function newGame(status) {
     if (status) {//El juego inicia / comprobaciones
         switch (true) {
             case playerX == '' && playerO == '':
-                alert('Los nombres no deben estar vacios');
+                console.log('Nombre de jugador 1 y 2 vacios')
                 break
 
                 case playerX == '':
-                    alert('Nombre de jugador X no puede estar vacio');
+                    console.log('Nombre de jugador 1 vacio')
                 break;
                 
             case playerO == '':
-                alert('Nombre de jugador O no puede estar vacio')
+                console.log('Nombre de jugador 2 vacio')
                 break;
 
             default://inicia la partida
@@ -276,6 +276,40 @@ function resetGameState() {
 function name(params) {
     
 }
+
+//music
+// background music
+function playMusic() {
+    let music = new Howl({
+        src: ['music/background.mp3'],
+        volume: 0.4,
+        loop: true,
+    });
+    music.play();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    playMusic();
+});
+
+//grid sound
+let sound = new Howl({
+    src: ['music/pencilSound.mp3'],
+    volume: 3.9
+});
+
+let frameButtons = document.querySelectorAll('.frame');
+
+function playSound(event) {
+    sound.play();
+    var frameId = event.target.id;
+
+    console.log('Botón clicado: ' + frameId);
+}
+
+frameButtons.forEach(function(button) {
+    button.addEventListener('click', playSound);
+});
 // main();
 
 //Botones menu de nueva partida
