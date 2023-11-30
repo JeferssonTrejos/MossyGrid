@@ -14,7 +14,7 @@
     text-align: center;
     box-sizing: border-box;
     padding: 2%;
-    border-radius: 4px;
+    border-radius: 17px;
 }
 
 #btnHowToPlayClose{
@@ -47,7 +47,7 @@
     box-sizing: border-box;
     padding: 2%;
     width: 16%;
-    border-radius: 4px;
+    border-radius: 17px;
     /* width: 20%;
     height: 30%; */
 }
@@ -88,7 +88,7 @@
     box-sizing: border-box;
     padding: 2%;
     width: 25%;
-    border-radius: 4px;
+    border-radius: 17px;
 }
 
 .start-game-container h4{
