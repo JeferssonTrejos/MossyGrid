@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //grid sound
 let sound = new Howl({
     src: ['music/pencilSound.mp3'],
-    volume: 3.9
+    volume: 7.9
 });
 
 let frameButtons = document.querySelectorAll('.frame');
