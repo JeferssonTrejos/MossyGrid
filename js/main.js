@@ -13,7 +13,7 @@ function menuHowToPlay (){
     }
 }
 
-//Muestra menu de inicio la primera ves que se carga la pagina
+//Muestra menu de inicio la primera vez que se carga la página
 function firsStartPage() {
     const startMenu = document.getElementById('start-menu');
     const btnStartFirsGame = document.getElementById('btnStartFirsGame');
