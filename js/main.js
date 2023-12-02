@@ -90,8 +90,8 @@ function newGame(status) {
     const namePlayerTwo = document.getElementById('playerNameTwo');
     const errorContainer = document.getElementById('errorNames');
 
-    let playerX = namePlayerOne.value
-    let playerO = namePlayerTwo.value
+    let playerX = namePlayerOne.value;
+    let playerO = namePlayerTwo.value;
 
     if (status) {
         switch (true) {
@@ -327,8 +327,6 @@ formPlayerNames.addEventListener('submit', (e) => {
     e.preventDefault();
     newGame(true)
 });
-
-// btnStartGame.addEventListener('click', () => { newGame(true) });
 
 btnCancelGame.addEventListener('click', () => { newGame(false) });
 
