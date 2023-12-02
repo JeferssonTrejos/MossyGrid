@@ -110,10 +110,10 @@
     justify-content: space-between;
 }
 
-.start-game-buttons button{
+#btnNewGameStart{ /**/
     box-sizing: border-box;
     padding: 5% 0;
-    margin: 0 1%;
+    margin: 2% 0 0 0;
     width: 100%;
     background-color: #8CC43C;
     border: none;
@@ -121,17 +121,26 @@
     cursor: pointer;
     text-align: center;
 }
-.btnHowToPlay{
+.buttonsStartGame{
     box-sizing: border-box;
     padding: 5% 0;
-    margin: 0 1%;
-    margin-top: 3%;
+    margin: 2% 0 0 0;
     width: 100%;
     background-color: #8CC43C;
     border: none;
     border-radius: 10px 20px;
     cursor: pointer;
     text-align: center;
+}
+
+#errorNames{
+    background-color: rgba(255, 0, 0, 0.75);
+    width: 90%;
+    margin: 2% auto 0 auto;
+    font-size: 0.85rem;
+    display: none;
+    color: whitesmoke;
+    cursor:auto;
 }
 
 #btnNewGameCancel{
@@ -142,7 +151,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: url('/MossyGrid/img/777f4e90abf163a474e5cb31cde7ce51.gif');
+    background: url('/img/777f4e90abf163a474e5cb31cde7ce51.gif');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
@@ -179,6 +188,7 @@ body::before {
     box-sizing: border-box;
     box-shadow: 0 0 10px rgb(0, 0, 0, 0.5);
     border-radius: 20px;
+    scale: 0.90;
     
 }
 

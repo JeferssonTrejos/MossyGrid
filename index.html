@@ -29,7 +29,6 @@
             <button id="btnHowToPlayClose">Close</button>
         </div>
     </div>
-
     <div id="start-menu">
         <div class="start-menu-container">
             <h4>Welcome to the Mossy Grid</h4>
@@ -40,13 +39,15 @@
     <div id="start-new-game">
         <div class="start-game-container">
             <h4>New Game</h4>
-            <input type="text" name="playerNameOne" id="playerNameOne" placeholder="Jugador X" required>
-            <input type="text" name="playerNameTwo" id="playerNameTwo" placeholder="Jugador O" required>
-            <div class="start-game-buttons">
-                <button id="btnNewGameStart">Start game</button>
-                <button id="btnNewGameCancel">Cancelar</button>
-            </div>
-            <button id="btnHowToPlayStartGame" class="btnHowToPlay">How to play?</button>
+            <form action="" id="formPlayerNames">
+                <input type="text" name="playerNameOne" id="playerNameOne" placeholder="Player X" >
+                <input type="text" name="playerNameTwo" id="playerNameTwo" placeholder="Player O" >
+                <p id="errorNames" class="buttonsStartGame"></p>
+                <input type="submit" id="btnNewGameStart" class="buttonsStartGame" value="Start game">
+            </form>
+            <button id="btnNewGameCancel" class="buttonsStartGame">Cancelar</button>
+            <button id="btnHowToPlayStartGame" class="buttonsStartGame">How to play?</button>
+
         </div>
     </div>
 
@@ -90,7 +91,7 @@
 
             </div>
             <div class="cuadro-opciones">
-                <img class="logo" src="/MossyGrid/img/logoMossyGrid.png">
+                <img class="logo" src="/img/logoMossyGrid.png">
                 <button id="newGame" class="boton">New game</button>
                 <button id="btnHowToPlay" class="boton">How to play?</button>
                 <button id="exitGame" class="boton">Exit</button>

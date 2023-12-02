@@ -1,4 +1,5 @@
 //declaration of variables const
+const formPlayerNames = document.getElementById('formPlayerNames');
 const statusDisplay = document.querySelector('.notificacionTurno');
 const gameState = ["", "", "", "", "", "", "", "", ""];
 const victories = [[0, 1, 2],
@@ -87,29 +88,40 @@ function menuNewGameDisplay() {
 function newGame(status) {
     const namePlayerOne = document.getElementById('playerNameOne');
     const namePlayerTwo = document.getElementById('playerNameTwo');
+    const errorContainer = document.getElementById('errorNames');
+
     let playerX = namePlayerOne.value
     let playerO = namePlayerTwo.value
 
     if (status) {
         switch (true) {
             case playerX == '' && playerO == '':
-                alert('Los nombres no pueden estar vacios');
+                error('Enter both names')
                 break
 
-                case playerX == '':
-                    console.log('Nombre de jugador 1 vacio')
+            case playerX == '':
+                error('Enter the name of player X')
                 break;
 
             case playerO == '':
-                alert('El nombre del jugador O no puede estar vacio')
+                error('Enter the name of player O')
                 break;
 
             default:
-                startNewGame(playerX, playerO)
+                error('', true)
+                startNewGame(playerX, playerO);
         }
     } else {
-        console.log('Nueva partida cancelada')
         menuNewGameDisplay();
+        error('', true)
+    };
+    //show or hide alert of player names
+    function error(errorMessage, hide) {
+        errorContainer.style.display = 'block'
+        errorContainer.innerHTML = errorMessage;
+        if (hide) {
+            errorContainer.style.display = 'none'
+        }
     }
 };
 
@@ -311,7 +323,12 @@ frameButtons.forEach(function (button) {
 //Botones
 btnNewGame.addEventListener('click', () => { menuNewGameDisplay() });
 
-btnStartGame.addEventListener('click', () => { newGame(true) });
+formPlayerNames.addEventListener('submit', (e) => {
+    e.preventDefault();
+    newGame(true)
+});
+
+// btnStartGame.addEventListener('click', () => { newGame(true) });
 
 btnCancelGame.addEventListener('click', () => { newGame(false) });
 
