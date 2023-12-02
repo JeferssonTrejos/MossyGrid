@@ -28,7 +28,7 @@ let playerOWins = 0;
 let frameButtons = document.querySelectorAll('.frame');
 let firstGameStarted = false;
 
-//Muestra menu de inicio la primera ves que se carga la pagina
+//Muestra menu de inicio la primera vez que se carga la página
 function firsStartPage() {
     const startMenu = document.getElementById('start-menu');
     const btnStartFirsGame = document.getElementById('btnStartFirsGame');
@@ -93,15 +93,15 @@ function newGame(status) {
     if (status) {
         switch (true) {
             case playerX == '' && playerO == '':
-                console.log('Nombre de jugador 1 y 2 vacios')
+                alert('Los nombres no pueden estar vacios');
                 break
 
-            case playerX == '':
-                console.log('Nombre de jugador 1 vacio')
+                case playerX == '':
+                    console.log('Nombre de jugador 1 vacio')
                 break;
 
             case playerO == '':
-                console.log('Nombre de jugador 2 vacio')
+                alert('El nombre del jugador O no puede estar vacio')
                 break;
 
             default:
