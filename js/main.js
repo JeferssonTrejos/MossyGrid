@@ -13,7 +13,7 @@ const victories = [
     [2, 4, 6]
 ];
 
-//Button
+//Buttons declaration
 const btnHowToPlayClose = document.getElementById('btnHowToPlayClose');
 const btnHowToPlayStartGame = document.getElementById('btnHowToPlayStartGame');
 const btnHowToPlay = document.getElementById('btnHowToPlay');
@@ -30,7 +30,7 @@ let playerOWins = 0;
 let frameButtons = document.querySelectorAll('.frame');
 let firstGameStarted = false;
 
-//Muestra menu de inicio la primera vez que se carga la página
+//Show home menu the first time the page loads
 function firsStartPage() {
     const startMenu = document.getElementById('start-menu');
     const btnStartFirsGame = document.getElementById('btnStartFirsGame');
@@ -43,7 +43,7 @@ function firsStartPage() {
     startMenu.style.display = 'flex';
 };
 
-//Muestra menu de como jugar
+//Show menu how to play
 function menuHowToPlay() {
     const howToPlayMenu = document.getElementById('how-to-play-menu');
     if (howToPlayMenu.style.display == "none" || howToPlayMenu.style.display == '') {
@@ -287,7 +287,7 @@ function resetGameState() {
     handleStatusDisplay('')
 }
 
-//music
+//MUSIC
 // background music
 function playMusic() {
     let music = new Howl({
@@ -316,22 +316,16 @@ frameButtons.forEach(function (button) {
     button.addEventListener('click', playSound);
 });
 
-//Botones
+//Buttons
 btnNewGame.addEventListener('click', () => { menuNewGameDisplay() });
-
 formPlayerNames.addEventListener('submit', (e) => {
     e.preventDefault();
     newGame(true)
 });
-
 btnCancelGame.addEventListener('click', () => { newGame(false) });
-
 btnExitGame.addEventListener('click', () => { window.close(); });
-
 btnHowToPlayClose.addEventListener('click', () => { menuHowToPlay(); });
-
 btnHowToPlayStartGame.addEventListener('click', () => { menuHowToPlay(); });
-
 btnHowToPlay.addEventListener('click', () => { menuHowToPlay(); });
 
 firsStartPage();
