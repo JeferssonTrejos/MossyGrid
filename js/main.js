@@ -2,14 +2,15 @@
 const formPlayerNames = document.getElementById('formPlayerNames');
 const statusDisplay = document.querySelector('.notificacionTurno');
 const gameState = ["", "", "", "", "", "", "", "", ""];
-const victories = [[0, 1, 2],
-[3, 4, 5],
-[6, 7, 8],
-[0, 3, 6],
-[1, 4, 7],
-[2, 5, 8],
-[0, 4, 8],
-[2, 4, 6]
+const victories = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
 ];
 
 //Button
@@ -144,7 +145,6 @@ function startNewGame(playerX, playerO) {
 //random turn
 function selectRandomTurn() {
     let numberSelector = Math.floor(Math.random() * 10);
-    console.log(numberSelector);
     if (numberSelector <= 5) {
         currentPlayer = 'X';
     } else {
@@ -182,7 +182,6 @@ function handleCellClick(clickedEvent) {
         hadleResultValidation();
 
     }
-    console.log(clickedCell);
 }
 
 function listeners() {
@@ -309,11 +308,8 @@ let sound = new Howl({
     volume: 7.9
 });
 
-function playSound(event) {
+function playSound() {
     sound.play();
-    const frameId = event.target.id;
-
-    console.log('Botón clicado: ' + frameId);
 }
 
 frameButtons.forEach(function (button) {
