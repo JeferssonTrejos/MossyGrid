@@ -296,7 +296,7 @@ let music = new Howl({
     loop: true,
 });
 music.play();
-
+    
 //grid sound
 let sound = new Howl({
     src: ['music/pencilSound.mp3'],
