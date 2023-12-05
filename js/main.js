@@ -289,19 +289,14 @@ function resetGameState() {
 
 //MUSIC
 // background music
-function playMusic() {
-    let music = new Howl({
-        src: ['music/background.mp3'],
-        volume: 0.4,
-        loop: true,
-    });
-    music.play();
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-    playMusic();
+let music = new Howl({
+    src: ['music/background.mp3'],
+    volume: 0.4,
+    loop: true,
 });
-
+    music.play();
+    
 //grid sound
 let sound = new Howl({
     src: ['music/pencilSound.mp3'],
