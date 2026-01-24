@@ -1,0 +1,165 @@
+/* --- VARIABLES MAESTRAS Y TEMAS --- */
+:root {
+  /* Paleta Light (Mossy Original) */
+  --bg-app: #f0f2f0; /* Gris verdoso muy claro */
+  --bg-container: #ffffff;
+  --panel-mossy: #74a257;
+  --panel-earth: #AD9F6D;
+  --btn-green: #8CC43C;
+  --text-main: #1a1a1a;
+  --text-light: #ffffff;
+  --border-grid: rgba(255, 255, 255, 0.8);
+  --shadow: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='dark'] {
+  /* Paleta Dark (Noche en el bosque) */
+  --bg-app: #0f172a;
+  --bg-container: #1e293b;
+  --panel-mossy: #2d452d;
+  --panel-earth: #4d4535;
+  --btn-green: #5a8025;
+  --text-main: #f8fafc;
+  --text-light: #f8fafc;
+  --border-grid: rgba(255, 255, 255, 0.3);
+  --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* --- RESET Y BASE --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- CONTENEDOR PRINCIPAL (Limitador de tamaño) --- */
+.container {
+  width: 95%;
+  max-width: 800px; /* Evita que se vea gigante en PC */
+  margin: 20px auto;
+  background-color: var(--bg-container);
+  border-radius: 24px;
+  padding: 10px;
+  box-shadow: 0 10px 30px var(--shadow);
+  box-sizing: border-box;
+}
+
+/* --- LAYOUT RESPONSIVO (Mobile-First) --- */
+main {
+  display: flex;
+  flex-direction: column; /* Stack vertical en móviles */
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  main {
+    flex-direction: row; /* Lado a lado en tablets/PC */
+    align-items: stretch;
+  }
+}
+
+/* --- PANELES --- */
+.cuadro-principal {
+  flex: 2;
+  background-color: var(--panel-mossy);
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-light);
+}
+
+.cuadro-opciones {
+  flex: 1;
+  background-color: var(--panel-earth);
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* --- TABLERO (Grid Logic) --- */
+.squares {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  max-width: 280px; /* Tamaño controlado */
+  aspect-ratio: 1 / 1;
+  margin: 20px auto;
+}
+
+.frame {
+  background: transparent;
+  /* Bordes internos únicamente */
+  border-right: 3px solid var(--border-grid);
+  border-bottom: 3px solid var(--border-grid);
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+/* Quitar bordes sobrantes para formar el símbolo # */
+.frame:nth-child(3n) { border-right: none; }
+.frame:nth-child(n+7) { border-bottom: none; }
+
+.frame:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- BOTONES (Mossy Style) --- */
+.boton, .boton-rest, .btn-primary {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px 20px;
+  background-color: var(--btn-green);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px 24px; /* Asimetría característica */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.boton:hover, .boton-rest:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.boton:active, .boton-rest:active {
+  transform: scale(0.95);
+}
+
+/* --- UTILIDADES --- */
+.logo {
+  max-width: 80px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+h2, h3, h4, p, span {
+  /* Asegura visibilidad en ambos modos */
+  color: inherit; 
+  margin: 5px 0;
+}
+
+.notificacionTurno {
+  font-weight: bold;
+  text-align: center;
+  min-height: 1.5em;
+}
