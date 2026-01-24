@@ -28,7 +28,7 @@ const handleMove = async (index) => {
     if (isVsBotGame.value && turn.value === 'O' && gameActive.value) {
         isThinking.value = true;
         try {
-            const res = await fetch('http://localhost:3000/api/bot-move', {
+            const res = await fetch('https://mossygrid.onrender.com/api/bot-move', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
