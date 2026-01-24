@@ -7,7 +7,10 @@ import GameBoard from './components/GameBoard.vue';
 import ScoreBoard from './components/ScoreBoard.vue';
 
 const { isDarkMode, toggleTheme } = useTheme();
-const { board, turn, scores, players, gameActive, isThinking, isVsBotGame, ejecutarJugada, reiniciarTablero } = useGame();
+const { 
+  board, turn, scores, players, gameActive, 
+  isThinking, isVsBotGame, ejecutarJugada, reiniciarTablero 
+} = useGame();
 
 const currentView = ref('setup');
 
@@ -28,10 +31,23 @@ const handleMove = async (index) => {
             const res = await fetch('http://localhost:3000/api/bot-move', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ board: board.value, botSymbol: 'O', playerSymbol: 'X' })
+                body: JSON.stringify({ 
+                    board: board.value, 
+                    botSymbol: 'O', 
+                    playerSymbol: 'X' 
+                })
             });
-            const { move } = await res.json();
-            if (move !== undefined) ejecutarJugada(move, checkWinner);
+
+            // VALIDACIÓN CRÍTICA: Si no es JSON o no es OK, no intentamos parsear
+            if (!res.ok) throw new Error("Servidor del bot fuera de línea");
+            
+            const data = await res.json();
+            if (data && data.move !== undefined) {
+                ejecutarJugada(data.move, checkWinner);
+            }
+        } catch (e) {
+            console.error("Error con el bot:", e.message);
+            // Si el bot falla, podrías avisar al usuario o permitir que otro jugador mueva
         } finally {
             isThinking.value = false;
         }
@@ -47,8 +63,10 @@ const iniciarPartida = (config) => {
 </script>
 
 <template>
-  <div class="app-container">
-    <button @click="toggleTheme" class="theme-toggle">
+  <div class="min-h-screen w-full flex flex-col items-center justify-center p-4 transition-colors duration-500 bg-slate-100 dark:bg-slate-950">
+    
+    <button @click="toggleTheme" 
+            class="fixed top-6 right-6 z-40 p-3 rounded-xl bg-white dark:bg-slate-800 shadow-lg border border-slate-200 dark:border-white/10 transition-transform active:scale-90">
         {{ isDarkMode ? '☀️' : '🌙' }}
     </button>
 
@@ -58,177 +76,46 @@ const iniciarPartida = (config) => {
       @close-menu="currentView = 'playing'"
     />
 
-    <main v-if="currentView === 'playing'" class="game-content">
-        <div class="game-panel">
-            <ScoreBoard
-                :players="players"
-                :scores="scores"
-                :current-turn="turn"
-            />
+    <main v-if="currentView === 'playing'" 
+          class="flex w-full max-w-4xl flex-col gap-6 md:flex-row md:items-stretch animate-in fade-in zoom-in duration-500">
+        
+        <section class="flex flex-[2] flex-col items-center gap-8 rounded-[2.5rem] p-8 shadow-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-white/20 dark:border-white/5">
+            <ScoreBoard :players="players" :scores="scores" :current-turn="turn" />
+            <GameBoard :board="board" :is-thinking="isThinking" @make-move="handleMove" />
+            <button class="w-full max-w-xs rounded-2xl bg-[#74a257] py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-lg shadow-[#74a257]/20 transition-all hover:brightness-110 active:scale-95"
+                    @click="reiniciarTablero">
+                Reiniciar Tablero
+            </button>
+        </section>
 
-            <GameBoard
-                :board="board"
-                :is-thinking="isThinking"
-                @make-move="handleMove"
-            />
+        <aside class="flex flex-1 flex-col justify-between gap-6 rounded-[2.5rem] p-8 shadow-xl bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/5">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#74a257] shadow-xl">
+                    <span class="text-2xl font-black text-white">MG</span>
+                </div>
+                <h1 class="text-xl font-black uppercase tracking-tighter dark:text-white">Mossy Grid</h1>
+                <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400">Software Engineering Edition</p>
+            </div>
 
-            <div class="controls">
-                <button class="btn-reset" @click="reiniciarTablero">Reset Match</button>
-            </div>
-        </div>
-
-        <div class="side-panel">
-            <div class="logo-container">
-                <div class="css-logo">MG</div>
-            </div>
-            <div class="menu-buttons">
-                <button @click="currentView = 'setup'" class="btn-menu">New Game</button>
-                <button @click="currentView = 'how-to-play'" class="btn-menu">How to play?</button>
-            </div>
-        </div>
+            <nav class="flex flex-col gap-3">
+                <button @click="currentView = 'setup'" 
+                        class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
+                    Nuevo Juego
+                </button>
+                <button @click="currentView = 'how-to-play'" 
+                        class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
+                    ¿Cómo jugar?
+                </button>
+            </nav>
+        </aside>
     </main>
   </div>
 </template>
 
 <style>
-/* Variables Globales de Color */
-:root {
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2c2c2c;
-  --accent-green: #4ade80;
-  --accent-orange: #fb923c;
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-[data-theme='dark'] {
-  /* Ya es el tema por defecto, puedes ajustar si quieres un tema claro */
-}
-
 body {
-    margin: 0;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: var(--font-family);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.app-container {
-    width: 100%;
-    max-width: 900px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.game-content {
-    display: flex;
-    gap: 30px;
-    background-color: var(--bg-secondary);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-}
-
-.game-panel {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    align-items: center;
-}
-
-.side-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 2px solid #3a3a3a;
-    padding-left: 30px;
-}
-
-.controls {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-/* Botones */
-.btn-reset, .btn-menu {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: var(--font-family);
-}
-
-.btn-reset {
-    background-color: var(--accent-green);
-    color: var(--bg-primary);
-    font-size: 1rem;
-}
-
-.btn-reset:hover { background-color: #22c55e; }
-
-.btn-menu {
-    background-color: #3a3a3a;
-    color: var(--text-primary);
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.btn-menu:hover { background-color: #4a4a4a; }
-
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--bg-secondary);
-    border: none;
-    color: var(--text-primary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-}
-
-/* Logo Placeholder */
-.css-logo {
-    font-size: 3rem;
-    font-weight: 900;
-    color: var(--accent-green);
-    text-shadow: 2px 2px var(--accent-orange);
-}
-
-/* Responsividad */
-@media (max-width: 768px) {
-    .game-content {
-        flex-direction: column;
-        padding: 20px;
-    }
-    .side-panel {
-        border-left: none;
-        border-top: 2px solid #3a3a3a;
-        padding-left: 0;
-        padding-top: 20px;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-around;
-    }
-    .menu-buttons {
-        display: flex;
-        gap: 10px;
-    }
-    .btn-menu {
-        margin-bottom: 0;
-        width: auto;
-    }
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 </style>

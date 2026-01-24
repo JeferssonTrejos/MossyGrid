@@ -1,17 +1,33 @@
 <template>
-  <div class="board-container">
-    <div class="squares">
-      <button
-        v-for="(cell, index) in board"
+  <div class="flex w-full justify-center p-4">
+    <div class="grid aspect-square w-full max-w-[300px] grid-cols-3 overflow-hidden rounded-[2rem] border border-white/20 bg-white/40 shadow-2xl backdrop-blur-md dark:bg-slate-900/60 dark:border-white/5">
+      
+      <button 
+        v-for="(cell, index) in board" 
         :key="index"
-        class="frame"
-        :class="{ 'is-x': cell === 'X', 'is-o': cell === 'O', 'is-thinking': isThinking && !cell }"
         @click="$emit('make-move', index)"
         :disabled="cell !== null || isThinking"
+        class="group relative flex items-center justify-center transition-all duration-300
+               /* Lógica de bordes optimizada con v4 */
+               not-nth-[3n]:border-r-2 
+               not-nth-[n+7]:border-b-2
+               border-slate-200/50 dark:border-white/10"
       >
+        <div v-if="!cell && !isThinking" 
+             class="absolute inset-0 bg-white/0 transition-colors group-hover:bg-white/20 dark:group-hover:bg-white/5">
+        </div>
+
         <Transition name="pop">
-          <span v-if="cell">{{ cell }}</span>
+          <span v-if="cell" 
+                class="text-4xl font-black md:text-5xl"
+                :class="cell === 'X' ? 'text-x-mossy' : 'text-o-earth'">
+            {{ cell }}
+          </span>
         </Transition>
+
+        <div v-if="isThinking && !cell" 
+             class="h-1.5 w-1.5 animate-bounce rounded-full bg-slate-400">
+        </div>
       </button>
     </div>
   </div>
@@ -27,80 +43,24 @@ defineEmits(['make-move']);
 </script>
 
 <style scoped>
-.board-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
+/* Colores Mossy con Brillo Sutil */
+.text-x-mossy {
+  color: #74a257;
+  filter: drop-shadow(0 0 8px rgba(116, 162, 87, 0.4));
 }
 
-.squares {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  width: 100%;
-  max-width: 400px; /* Tamaño máximo del tablero */
-  aspect-ratio: 1 / 1; /* Mantiene el tablero cuadrado */
+.text-o-earth {
+  color: #AD9F6D;
+  filter: drop-shadow(0 0 8px rgba(173, 159, 109, 0.4));
 }
 
-.frame {
-  background: transparent;
-  border-right: 3px solid var(--border-grid);
-  border-bottom: 3px solid var(--border-grid);
-  
-  /* REDUCCIÓN AQUÍ: Antes era 3rem o 4.5rem, ahora lo hacemos más elegante */
-  font-size: clamp(1.8rem, 8vw, 2.5rem); 
-  
-  font-weight: bold;
-  color: var(--text-light);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-  
-  /* Añadimos un pequeño padding interno para que la letra no toque los bordes */
-  padding: 5px; 
-}
-
-.frame:hover:not(:disabled) {
-  background-color: #454545;
-  transform: translateY(-2px);
-}
-
-.frame:disabled {
-  cursor: default;
-}
-
-/* Estilos de los símbolos con Glow */
-.is-x {
-  color: var(--accent-green);
-  text-shadow: 0 0 15px var(--accent-green);
-}
-
-.is-o {
-  color: var(--accent-orange);
-  text-shadow: 0 0 15px var(--accent-orange);
-}
-
-/* Animación del Bot Pensando */
-.is-thinking {
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { background-color: #3a3a3a; }
-  50% { background-color: #4a4a4a; }
-  100% { background-color: #3a3a3a; }
-}
-
-/* Animación de entrada de símbolo */
+/* Animación de entrada de ficha */
 .pop-enter-active {
-  animation: pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes pop-in {
-  0% { transform: scale(0); opacity: 0; }
+  0% { transform: scale(0.3); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 </style>

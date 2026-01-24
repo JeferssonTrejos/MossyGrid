@@ -1,25 +1,39 @@
 <template>
-  <div class="scoreboard">
-    <div class="player-card" :class="{ 'active-turn': currentTurn === 'X' }">
-      <div class="player-symbol x-symbol">X</div>
-      <div class="player-info">
-        <h2 class="player-name">{{ players.X }}</h2>
-        <p v-if="currentTurn === 'X'" class="turn-indicator">YOUR TURN</p>
+  <div class="flex w-full justify-center p-2">
+    <div class="flex w-full max-w-md items-center justify-between rounded-3xl border border-white/20 bg-white/40 p-5 shadow-xl backdrop-blur-md transition-all duration-500 dark:border-white/5 dark:bg-slate-900/60">
+      
+      <div class="flex flex-col items-center gap-1 transition-all duration-500"
+           :class="currentTurn === 'X' ? 'scale-110 opacity-100' : 'scale-90 opacity-40'">
+        <span class="text-3xl font-black text-x-mossy">X</span>
+        <div class="text-center">
+          <h2 class="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+            {{ players.X }}
+          </h2>
+          <p v-if="currentTurn === 'X'" class="mt-1 text-[8px] font-black uppercase tracking-tighter text-mossy-green animate-pulse">
+            Tu Turno
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class="score-display">
-      <span class="score">{{ scores.X }}</span>
-      <span class="divider">-</span>
-      <span class="score">{{ scores.O }}</span>
-    </div>
-
-    <div class="player-card" :class="{ 'active-turn': currentTurn === 'O' }">
-      <div class="player-info">
-        <h2 class="player-name">{{ players.O }}</h2>
-        <p v-if="currentTurn === 'O'" class="turn-indicator">YOUR TURN</p>
+      <div class="flex items-center gap-4 px-4 text-3xl font-black tracking-tighter text-slate-800 dark:text-white">
+        <span class="tabular-nums">{{ scores.X }}</span>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <span class="tabular-nums">{{ scores.O }}</span>
       </div>
-      <div class="player-symbol o-symbol">O</div>
+
+      <div class="flex flex-col items-center gap-1 transition-all duration-500"
+           :class="currentTurn === 'O' ? 'scale-110 opacity-100' : 'scale-90 opacity-40'">
+        <span class="text-3xl font-black text-o-earth">O</span>
+        <div class="text-center">
+          <h2 class="text-[10px] font-black uppercase tracking-widest text-slate-500 dark:text-slate-400">
+            {{ players.O }}
+          </h2>
+          <p v-if="currentTurn === 'O'" class="mt-1 text-[8px] font-black uppercase tracking-tighter text-mossy-earth animate-pulse">
+            Tu Turno
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -33,85 +47,14 @@ defineProps({
 </script>
 
 <style scoped>
-.scoreboard {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  background-color: #3a3a3a;
-  padding: 15px 25px;
-  border-radius: 15px;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+/* Colores Mossy heredados de tu tema */
+.text-x-mossy {
+  color: #74a257;
+  filter: drop-shadow(0 0 10px rgba(116, 162, 87, 0.3));
 }
 
-.player-card {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-}
-
-.player-card.active-turn {
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-
-
-.x-symbol { color: var(--accent-green); text-shadow: 0 0 10px var(--accent-green); }
-.o-symbol { color: var(--text-primary); text-shadow: 0 0 10px var(--text-primary); }
-
-.player-info {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Dentro de la sección <style> de ScoreBoard.vue */
-.player-symbol {
-  /* Antes era 3rem, bajémoslo a la mitad para que sea un ícono y no el protagonista */
-  font-size: 1.5rem; 
-  font-weight: bold;
-  line-height: 1;
-}
-
-.player-name {
-  font-size: 0.9rem; /* Nombre más pequeño y elegante */
-  font-weight: 600;
-}
-
-.turn-indicator {
-  margin: 5px 0 0 0;
-  font-size: 0.8rem;
-  color: var(--accent-green);
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.score-display {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--text-primary);
-}
-
-.divider { color: var(--text-secondary); }
-
-@media (max-width: 600px) {
-    .scoreboard {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    .player-card {
-        flex-direction: column;
-        gap: 5px;
-    }
-    .score-display {
-        order: 2; /* Pone el marcador en medio en móvil */
-        font-size: 2rem;
-    }
+.text-o-earth {
+  color: #AD9F6D;
+  filter: drop-shadow(0 0 10px rgba(173, 159, 109, 0.3));
 }
 </style>

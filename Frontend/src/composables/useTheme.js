@@ -4,15 +4,22 @@ export function useTheme() {
     const isDarkMode = ref(false);
 
     const applyTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        // Forzamos el color del body por si acaso
-        document.body.style.backgroundColor = theme === 'dark' ? '#1a1a1a' : '#f3f4f6';
+        const root = document.documentElement;
+
+        if (theme === 'dark') {
+            root.classList.add('dark');
+        } else {
+            root.classList.remove('dark');
+        }
+        root.setAttribute('data-theme', theme);
+
         localStorage.setItem('mossy-theme', theme);
     };
 
     const toggleTheme = () => {
         isDarkMode.value = !isDarkMode.value;
-        applyTheme(isDarkMode.value ? 'dark' : 'light');
+        const newTheme = isDarkMode.value ? 'dark' : 'light';
+        applyTheme(newTheme);
     };
 
     onMounted(() => {
