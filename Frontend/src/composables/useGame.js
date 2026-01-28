@@ -8,7 +8,7 @@ export function useGame() {
   const gameActive = ref(true);
   const isThinking = ref(false);
   const isVsBotGame = ref(false);
-  const currentView = ref('setup'); // Movido aquí para limpiar App.vue
+  const currentView = ref('setup'); 
 
   const VICTORIES = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -42,7 +42,6 @@ export function useGame() {
     return 'continue';
   };
 
-  // La lógica del Fetch ahora vive aquí, aislada
   const llamarAlBot = async () => {
     if (!isVsBotGame.value || turn.value !== 'O' || !gameActive.value) return;
 

@@ -47,7 +47,6 @@ defineProps({
 </script>
 
 <style scoped>
-/* Colores Mossy heredados de tu tema */
 .text-x-mossy {
   color: #74a257;
   filter: drop-shadow(0 0 10px rgba(116, 162, 87, 0.3));

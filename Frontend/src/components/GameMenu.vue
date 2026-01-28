@@ -80,7 +80,6 @@ const startGame = () => {
 </script>
 
 <style scoped>
-/* Animación del Modal (Fade + Scale) */
 .modal-enter-active, .modal-leave-active {
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -89,7 +88,7 @@ const startGame = () => {
   transform: scale(0.9) translateY(20px);
 }
 
-/* Animación del Input (Slide Down) */
+
 .slide-enter-active, .slide-leave-active {
   transition: all 0.3s ease;
 }

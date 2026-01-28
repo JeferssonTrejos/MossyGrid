@@ -43,7 +43,6 @@ defineEmits(['make-move']);
 </script>
 
 <style scoped>
-/* Colores Mossy con Brillo Sutil */
 .text-x-mossy {
   color: #74a257;
   filter: drop-shadow(0 0 8px rgba(116, 162, 87, 0.4));
@@ -54,7 +53,7 @@ defineEmits(['make-move']);
   filter: drop-shadow(0 0 8px rgba(173, 159, 109, 0.4));
 }
 
-/* Animación de entrada de ficha */
+
 .pop-enter-active {
   animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }

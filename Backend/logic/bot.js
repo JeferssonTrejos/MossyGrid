@@ -1,6 +1,4 @@
-/**
- * Lógica del algoritmo Minimax para Equis Cero
- */
+
 const VICTORIES = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // Filas
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columnas
@@ -49,12 +47,11 @@ function minimax(board, depth, isMaximizing, botSymbol, playerSymbol) {
     }
 }
 
-// Esta es la función que exportamos
 const getBestMove = (board, botSymbol, playerSymbol) => {
     let bestScore = -Infinity;
     let move = -1;
     
-    // Hacemos una copia para no alterar el tablero original
+
     let tempBoard = [...board];
 
     for (let i = 0; i < 9; i++) {
