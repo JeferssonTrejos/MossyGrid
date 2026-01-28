@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from 'vue';
 import { useGame } from './composables/useGame';
 import { useTheme } from './composables/useTheme';
 import GameMenu from './components/GameMenu.vue';
@@ -8,56 +7,16 @@ import ScoreBoard from './components/ScoreBoard.vue';
 
 const { isDarkMode, toggleTheme } = useTheme();
 const { 
-  board, turn, scores, players, gameActive, 
-  isThinking, isVsBotGame, ejecutarJugada, reiniciarTablero 
+  board, turn, scores, players, isThinking, currentView, 
+  iniciarPartida, ejecutarJugada, llamarAlBot, reiniciarTablero 
 } = useGame();
 
-const currentView = ref('setup');
-
-const VICTORIES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-
-const checkWinner = () => {
-  return VICTORIES.some(([a, b, c]) =>
-    board.value[a] && board.value[a] === board.value[b] && board.value[a] === board.value[c]
-  );
-};
 
 const handleMove = async (index) => {
-    ejecutarJugada(index, checkWinner);
-
-    if (isVsBotGame.value && turn.value === 'O' && gameActive.value) {
-        isThinking.value = true;
-        try {
-            const baseUrl = import.meta.env.VITE_API_URL
-            const res = await fetch(`${baseUrl}/api/bot-move`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    board: board.value, 
-                    botSymbol: 'O', 
-                    playerSymbol: 'X' 
-                })
-            });
-
-            if (!res.ok) throw new Error("Servidor del bot fuera de línea");
-            
-            const data = await res.json();
-            if (data && data.move !== undefined) {
-                ejecutarJugada(data.move, checkWinner);
-            }
-        } catch (e) {
-            console.error("Error con el bot:", e.message);
-        } finally {
-            isThinking.value = false;
-        }
-    }
-};
-
-const iniciarPartida = (config) => {
-    players.value = { X: config.X, O: config.O };
-    isVsBotGame.value = config.vsBot;
-    reiniciarTablero();
-    currentView.value = 'playing';
+  const status = ejecutarJugada(index);
+  if (status === 'continue') {
+    await llamarAlBot();
+  }
 };
 </script>
 
@@ -69,11 +28,7 @@ const iniciarPartida = (config) => {
         {{ isDarkMode ? '☀️' : '🌙' }}
     </button>
 
-    <GameMenu
-      :view="currentView"
-      @start-game="iniciarPartida"
-      @close-menu="currentView = 'playing'"
-    />
+    <GameMenu :view="currentView" @start-game="iniciarPartida" @close-menu="currentView = 'playing'" />
 
     <main v-if="currentView === 'playing'" 
           class="flex w-full max-w-4xl flex-col gap-6 md:flex-row md:items-stretch animate-in fade-in zoom-in duration-500">
@@ -93,28 +48,20 @@ const iniciarPartida = (config) => {
                     <span class="text-2xl font-black text-white">MG</span>
                 </div>
                 <h1 class="text-xl font-black uppercase tracking-tighter dark:text-white">Mossy Grid</h1>
-                <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400">Software Engineering Edition</p>
+                <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 text-center">San Miguel, SV</p>
             </div>
 
             <nav class="flex flex-col gap-3">
-                <button @click="currentView = 'setup'" 
-                        class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
-                    Nuevo Juego
-                </button>
-                <button @click="currentView = 'how-to-play'" 
-                        class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
-                    ¿Cómo jugar?
-                </button>
+                <button @click="currentView = 'setup'" class="menu-btn">Nuevo Juego</button>
+                <button @click="currentView = 'how-to-play'" class="menu-btn">¿Cómo jugar?</button>
             </nav>
         </aside>
     </main>
   </div>
 </template>
 
-<style>
-body {
-  margin: 0;
-  overflow-x: hidden;
-  -webkit-tap-highlight-color: transparent;
+<style scoped>
+.menu-btn {
+  @apply w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10;
 }
 </style>
