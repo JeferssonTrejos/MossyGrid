@@ -5,11 +5,9 @@ const { getBestMove } = require('./logic/bot');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares
-app.use(cors()); // Permite que Vue se conecte desde otro puerto
-app.use(express.json()); // Para poder leer el body en JSON
+app.use(cors()); 
+app.use(express.json()); 
 
-// Endpoint para el movimiento del Bot
 app.post('/api/bot-move', (req, res) => {
     const { board, botSymbol, playerSymbol } = req.body;
 
@@ -19,7 +17,6 @@ app.post('/api/bot-move', (req, res) => {
 
     const move = getBestMove(board, botSymbol, playerSymbol);
 
-    // Simulamos un pequeño retraso para que parezca que el bot está "pensando"
     setTimeout(() => {
         res.json({ move });
     }, 600);

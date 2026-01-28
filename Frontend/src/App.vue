@@ -28,7 +28,8 @@ const handleMove = async (index) => {
     if (isVsBotGame.value && turn.value === 'O' && gameActive.value) {
         isThinking.value = true;
         try {
-            const res = await fetch('https://mossygrid.onrender.com/api/bot-move', {
+            const baseUrl = import.meta.env.VITE_API_URL
+            const res = await fetch(`${baseUrl}/api/bot-move`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -38,7 +39,6 @@ const handleMove = async (index) => {
                 })
             });
 
-            // VALIDACIÓN CRÍTICA: Si no es JSON o no es OK, no intentamos parsear
             if (!res.ok) throw new Error("Servidor del bot fuera de línea");
             
             const data = await res.json();
@@ -47,7 +47,6 @@ const handleMove = async (index) => {
             }
         } catch (e) {
             console.error("Error con el bot:", e.message);
-            // Si el bot falla, podrías avisar al usuario o permitir que otro jugador mueva
         } finally {
             isThinking.value = false;
         }
