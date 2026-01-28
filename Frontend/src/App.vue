@@ -52,7 +52,9 @@ const handleMove = async (index) => {
             </div>
 
             <nav class="flex flex-col gap-3">
-                <button @click="currentView = 'setup'" class="menu-btn">Nuevo Juego</button>
+                <button @click="currentView = 'setup'" class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
+                    Nuevo Juego
+                </button>
                 <button @click="currentView = 'how-to-play'" class="menu-btn">¿Cómo jugar?</button>
             </nav>
         </aside>
@@ -60,8 +62,3 @@ const handleMove = async (index) => {
   </div>
 </template>
 
-<style scoped>
-.menu-btn {
-  @apply w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10;
-}
-</style>
