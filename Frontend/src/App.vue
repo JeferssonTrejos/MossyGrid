@@ -44,8 +44,8 @@ const handleMove = async (index) => {
 
         <aside class="flex flex-1 flex-col justify-between gap-6 rounded-[2.5rem] p-8 shadow-xl bg-white/50 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/5">
             <div class="flex flex-col items-center text-center">
-                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#74a257] shadow-xl">
-                    <span class="text-2xl font-black text-white">MG</span>
+                <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-xl hadow-xl">
+                    <img src="../public/img/logoMossyGrid.png" alt="">
                 </div>
                 <h1 class="text-xl font-black uppercase tracking-tighter dark:text-white">Mossy Grid</h1>
                 <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 text-center">San Miguel, SV</p>
