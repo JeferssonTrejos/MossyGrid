@@ -10,4 +10,11 @@
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
+
+  <script>
+  // Este script se ejecuta antes de que Vue cargue para evitar el flash
+  const theme = localStorage.getItem('mossy-theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  if (theme === 'dark') document.documentElement.classList.add('dark');
+</script>
 </html>
