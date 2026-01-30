@@ -10,7 +10,7 @@
             {{ players.X }}
           </h2>
           <p v-if="currentTurn === 'X'" class="mt-1 text-[8px] font-black uppercase tracking-tighter text-mossy-green animate-pulse">
-            Tu Turno
+            your turn
           </p>
         </div>
       </div>
@@ -29,7 +29,7 @@
             {{ players.O }}
           </h2>
           <p v-if="currentTurn === 'O'" class="mt-1 text-[8px] font-black uppercase tracking-tighter text-mossy-earth animate-pulse">
-            Tu Turno
+            your turn
           </p>
         </div>
       </div>

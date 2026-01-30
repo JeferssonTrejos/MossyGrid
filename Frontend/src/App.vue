@@ -38,7 +38,7 @@ const handleMove = async (index) => {
             <GameBoard :board="board" :is-thinking="isThinking" @make-move="handleMove" />
             <button class="w-full max-w-xs rounded-2xl bg-[#74a257] py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-lg shadow-[#74a257]/20 transition-all hover:brightness-110 active:scale-95"
                     @click="reiniciarTablero">
-                Reiniciar Tablero
+                Reset 
             </button>
         </section>
 
@@ -53,9 +53,11 @@ const handleMove = async (index) => {
 
             <nav class="flex flex-col gap-3">
                 <button @click="currentView = 'setup'" class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
-                    Nuevo Juego
+                    New Game
                 </button>
-                <button @click="currentView = 'how-to-play'" class="menu-btn">¿Cómo jugar?</button>
+                <button @click="currentView = 'how-to-play'"  class="w-full rounded-xl bg-slate-200/50 py-3 text-[10px] font-black uppercase tracking-widest text-slate-600 transition-colors hover:bg-slate-200 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10">
+                    how to play
+                </button>
             </nav>
         </aside>
     </main>
